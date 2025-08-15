@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
 
     let allPharmacies = [];
-    const jsonFilePath = 'pharmacies.json';
+    const jsonFilePath = 'pharmacies.json';//ไฟล์ข้อมูลที่อ่านเอาไปขึ้นเว็ป
 
     fetch(jsonFilePath)
         .then(response => {
