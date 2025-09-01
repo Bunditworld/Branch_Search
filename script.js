@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
 
     let allPharmacies = [];
-    const jsonFilePath = 'pharmacies.json';
+    const jsonFilePath = 'pharmacies.json';//ไฟล์ข้อมูลที่อ่านเอาไปขึ้นเว็ป
 
     fetch(jsonFilePath)
         .then(response => {
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data) && data.length > 0) {
                 allPharmacies = data;
                 populateShopTypes();
-                // We don't populate regions here initially
+                // ขอร้องอย่างให้ส่วนนี้ได้ทำงานเลย
                 displayInitialMessage();
             } else {
                 pharmacyListDiv.innerHTML = '<p class="error-message">ไม่พบข้อมูลร้านยาในไฟล์ หรือข้อมูลไม่ถูกต้อง</p>';
@@ -143,13 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
             p.อำเภอ === selectedDistrict
         );
 
-        pharmacyListDiv.innerHTML = '';
+        pharmacyListDiv.innerHTML = '';//อย่าพังอีกขอร้อง
 
         if (filteredPharmacies.length > 0) {
             filteredPharmacies.forEach(pharmacy => {
                 const pharmacyCard = document.createElement('div');
-                pharmacyCard.className = 'pharmacy-card';
-
+                pharmacyCard.className = 'pharmacy-card';//ดึงข้อมูลออกมา
                 const pharmacyName = pharmacy.ชื่อร้านยา || 'ไม่ระบุชื่อ';
                 const address = pharmacy.ที่อยู่ || 'ไม่ระบุที่อยู่';
                 const shopType = pharmacy.ประเภทร้านค้า || 'ไม่ระบุ';
@@ -166,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                 `;
 
-                // การ์ดแสดงผลร้านค้า
+                // การ์ดแสดงผลร้านค้า ที่แสดงรวมถึงที่เพิ่มให้กดเบอร์ออกโทรทันที
                 pharmacyCard.innerHTML = `
                     <h3>${pharmacyName}</h3>
                     <p><strong>ประเภทร้านค้า:</strong> ${shopType}</p>
@@ -202,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lat && lon && lat !== '' && lon !== '') {
             return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
         } else {
-            const searchQuery = encodeURIComponent(`${name} ${district} ${province}`);
+            const searchQuery = encodeURIComponent(`${name} ${district} ${province}`);//พังบ่อยซะเหลือเกินอย่าแตะมันนะ
             return `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
         }
     }
