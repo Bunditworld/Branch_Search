@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>ภาค:</strong> ${region}</p>
                     <p><strong>จังหวัด:</strong> ${province}</p>
                     <p><strong>อำเภอ:</strong> ${district}</p>
-                    <p><strong>เบอร์โทร:</strong> ${phone}</p>
+                    <p><strong>เบอร์โทร:</strong> ${phone} <a href="tel:${phone.replace(/\s/g, '').replace(/\//g, ',')}" class="phone-link">${phone}</a></p> //อันนี้คือกดเบอร์แล้วเด้งเข้าโทรเลย
                     <a href="${mapUrl}" target="_blank" class="map-link">${mapIconSvg}</a>`;
                 pharmacyListDiv.appendChild(pharmacyCard);
             });
