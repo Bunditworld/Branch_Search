@@ -5,14 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const districtSelect = document.getElementById('districtSelect');
     const pharmacyListDiv = document.getElementById('pharmacyList');
     const searchButton = document.getElementById('searchButton');
+
     let allPharmacies = [];
-    const jsonFilePath = 'pharmacies.json';//ไฟล์ข้อมูลที่อ่านเอาไปขึ้นเว็ป
+    const jsonFilePath = 'pharmacies.json';
 
     fetch(jsonFilePath)
         .then(response => {
             if (!response.ok) {
-                console.error(`ข้อผิดพลาด HTTP ${response.status}`);
-                throw new Error(`HTTP error ${response.status}`);
+                console.error(`ข้อผิดพลาด HTTP: สถานะ ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
@@ -20,18 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data) && data.length > 0) {
                 allPharmacies = data;
                 populateShopTypes();
+                // We don't populate regions here initially
                 displayInitialMessage();
             } else {
-                pharmacyListDiv.innerHTML = '<p class="error-message">ไม่พบข้อมูล หรือข้อมูลไม่ถูกต้อง</p>';
+                pharmacyListDiv.innerHTML = '<p class="error-message">ไม่พบข้อมูลร้านยาในไฟล์ หรือข้อมูลไม่ถูกต้อง</p>';
             }
         })
         .catch(error => {
             console.error('เกิดข้อผิดพลาด:', error);
-            pharmacyListDiv.innerHTML = '<p class="error-message">โหลดข้อมูลร้านยาไม่ได้ กรุณาลองใหม่</p>';
+            pharmacyListDiv.innerHTML = '<p class="error-message">ไม่สามารถโหลดข้อมูลร้านยาได้ กรุณาลองใหม่อีกครั้ง</p>';
         });
+
     function displayInitialMessage() {
         pharmacyListDiv.innerHTML = '<p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ เพื่อแสดงร้าน</p>';
     }
+
     function populateShopTypes() {
         const shopTypes = [...new Set(allPharmacies.map(p => p.ประเภทร้านค้า).filter(Boolean))].sort();
         shopTypeSelect.innerHTML = '<option value="">-- เลือกประเภทร้านค้า --</option>';
@@ -42,16 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
             shopTypeSelect.appendChild(option);
         });
         shopTypeSelect.disabled = false;
+        // Initially disable all subsequent dropdowns
         regionSelect.disabled = true;
         provinceSelect.disabled = true;
         districtSelect.disabled = true;
     }
+
     function populateRegions() {
         const selectedShopType = shopTypeSelect.value;
         const regions = [...new Set(allPharmacies
             .filter(p => !selectedShopType || p.ประเภทร้านค้า === selectedShopType)
             .map(p => p.ภาค)
             .filter(Boolean))].sort();
+
         regionSelect.innerHTML = '<option value="">-- เลือกภาค --</option>';
         regions.forEach(region => {
             const option = document.createElement('option');
@@ -60,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             regionSelect.appendChild(option);
         });
 
+        // Enable the region select only if a shop type is selected
         if (selectedShopType) {
             regionSelect.disabled = false;
         } else {
@@ -68,17 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
         provinceSelect.disabled = true;
         districtSelect.disabled = true;
     }
+
     function populateProvinces(selectedRegion) {
         const selectedShopType = shopTypeSelect.value;
         provinceSelect.innerHTML = '<option value="">-- เลือกจังหวัด --</option>';
         districtSelect.innerHTML = '<option value="">-- เลือกอำเภอ --</option>';
         districtSelect.disabled = true;
+
         if (selectedRegion) {
             const provinces = [...new Set(allPharmacies
                 .filter(p => (!selectedShopType || p.ประเภทร้านค้า === selectedShopType) && p.ภาค === selectedRegion)
                 .map(p => p.จังหวัด)
                 .filter(Boolean)
             )].sort();
+
             provinces.forEach(province => {
                 const option = document.createElement('option');
                 option.value = province;
@@ -90,15 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
             provinceSelect.disabled = true;
         }
     }
+
     function populateDistricts(selectedProvince) {
         const selectedShopType = shopTypeSelect.value;
         districtSelect.innerHTML = '<option value="">-- เลือกอำเภอ --</option>';
+
         if (selectedProvince) {
             const districts = [...new Set(allPharmacies
                 .filter(p => (!selectedShopType || p.ประเภทร้านค้า === selectedShopType) && p.จังหวัด === selectedProvince)
                 .map(p => p.อำเภอ)
                 .filter(Boolean)
             )].sort();
+
             districts.forEach(district => {
                 const option = document.createElement('option');
                 option.value = district;
@@ -110,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             districtSelect.disabled = true;
         }
     }
+
     function displayPharmacies() {
         const selectedShopType = shopTypeSelect.value;
         const selectedRegion = regionSelect.value;
@@ -120,17 +135,21 @@ document.addEventListener('DOMContentLoaded', () => {
             pharmacyListDiv.innerHTML = '<p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ ครบถ้วน</p>';
             return;
         }
+
         const filteredPharmacies = allPharmacies.filter(p =>
             p.ประเภทร้านค้า === selectedShopType &&
             p.ภาค === selectedRegion &&
             p.จังหวัด === selectedProvince &&
             p.อำเภอ === selectedDistrict
         );
+
         pharmacyListDiv.innerHTML = '';
+
         if (filteredPharmacies.length > 0) {
             filteredPharmacies.forEach(pharmacy => {
                 const pharmacyCard = document.createElement('div');
                 pharmacyCard.className = 'pharmacy-card';
+
                 const pharmacyName = pharmacy.ชื่อร้านยา || 'ไม่ระบุชื่อ';
                 const address = pharmacy.ที่อยู่ || 'ไม่ระบุที่อยู่';
                 const shopType = pharmacy.ประเภทร้านค้า || 'ไม่ระบุ';
@@ -138,11 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const province = pharmacy.จังหวัด || 'ไม่ระบุ';
                 const district = pharmacy.อำเภอ || 'ไม่ระบุ';
                 const phone = pharmacy.เบอร์โทร || '-';
+
                 const mapUrl = createGoogleMapsUrl(pharmacy);
+
                 const mapIconSvg = `
                     <svg class="map-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
-                    </svg>`;
+                    </svg>
+                `;
+
+                // การ์ดแสดงผลร้านค้า
                 pharmacyCard.innerHTML = `
                     <h3>${pharmacyName}</h3>
                     <p><strong>ประเภทร้านค้า:</strong> ${shopType}</p>
@@ -150,8 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>ภาค:</strong> ${region}</p>
                     <p><strong>จังหวัด:</strong> ${province}</p>
                     <p><strong>อำเภอ:</strong> ${district}</p>
-                    <p><strong>เบอร์โทร:</strong> ${phone} <a href="tel:${phone.replace(/\s/g, '').replace(/\//g, ',')}" class="phone-link">${phone}</a></p> //อันนี้คือกดเบอร์แล้วเด้งเข้าโทรเลย
-                    <a href="${mapUrl}" target="_blank" class="map-link">${mapIconSvg}</a>`;
+                    <p><strong>เบอร์โทร:</strong> <a href="tel:${phone.replace(/\s/g, '').replace(/\//g, ',')}" class="phone-link">${phone}</a></p>
+                    <a href="${mapUrl}" target="_blank" class="map-link">
+                        ${mapIconSvg}
+                    </a>
+                `;
                 pharmacyListDiv.appendChild(pharmacyCard);
             });
             console.log(`พบ ${filteredPharmacies.length} ร้านยาที่ตรงกับเงื่อนไข`);
@@ -160,26 +187,33 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("ไม่พบร้านยาที่ตรงกับเงื่อนไข");
         }
     }
+
     function clearPharmacyList() {
-        pharmacyListDiv.innerHTML = '';}
+        pharmacyListDiv.innerHTML = '';
+    }
+
     function createGoogleMapsUrl(pharmacy) {
         const lat = pharmacy.latitude;
         const lon = pharmacy.longitude;
         const name = pharmacy.ชื่อร้านยา || '';
         const province = pharmacy.จังหวัด || '';
         const district = pharmacy.อำเภอ || '';
+
         if (lat && lon && lat !== '' && lon !== '') {
-            return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+            return `http://googleusercontent.com/maps.google.com/9`;
         } else {
             const searchQuery = encodeURIComponent(`${name} ${district} ${province}`);
-            return `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
+            return `https://www.google.com/maps/search/?api=1&query=ชื่อร้านยา+จังหวัด+อำเภอ0`;
         }
     }
+
+    // Event listeners
     shopTypeSelect.addEventListener('change', () => {
         regionSelect.value = '';
         provinceSelect.value = '';
         districtSelect.value = '';
         clearPharmacyList();
+
         if (shopTypeSelect.value) {
             populateRegions();
         } else {
@@ -188,10 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
             districtSelect.disabled = true;
         }
     });
+
     regionSelect.addEventListener('change', () => {
         provinceSelect.value = '';
         districtSelect.value = '';
         clearPharmacyList();
+
         if (regionSelect.value) {
             populateProvinces(regionSelect.value);
         } else {
@@ -199,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             districtSelect.disabled = true;
         }
     });
+
     provinceSelect.addEventListener('change', () => {
         districtSelect.value = '';
         clearPharmacyList();
@@ -209,8 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
             districtSelect.disabled = true;
         }
     });
+
     districtSelect.addEventListener('change', () => {
         clearPharmacyList();
     });
+
     searchButton.addEventListener('click', displayPharmacies);
 });
