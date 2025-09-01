@@ -200,10 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const district = pharmacy.อำเภอ || '';
 
         if (lat && lon && lat !== '' && lon !== '') {
-            return `http://googleusercontent.com/maps.google.com/9`;
+            return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
         } else {
             const searchQuery = encodeURIComponent(`${name} ${district} ${province}`);
-            return `https://www.google.com/maps/search/?api=1&query=ชื่อร้านยา+จังหวัด+อำเภอ0`;
+            return `https://www.google.com/maps/search/?api=1&query=${searchQuery}`;
         }
     }
 
