@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             shopTypeSelect.appendChild(option);
         });
         shopTypeSelect.disabled = false;
-        // Initially disable all subsequent dropdowns
+        //dropdowns
         regionSelect.disabled = true;
         provinceSelect.disabled = true;
         districtSelect.disabled = true;
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             regionSelect.appendChild(option);
         });
 
-        // Enable the region select only if a shop type is selected
+        //shop selected
         if (selectedShopType) {
             regionSelect.disabled = false;
         } else {
