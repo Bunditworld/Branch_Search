@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data) && data.length > 0) {
                 allPharmacies = data;
                 populateShopTypes();
-                // ขอร้องอย่างให้ส่วนนี้ได้ทำงานเลย
+                // อย่าให้ส่วนนี้ได้ทำงาน = หยาบละ
                 displayInitialMessage();
             } else {
                 pharmacyListDiv.innerHTML = '<p class="error-message">ไม่พบข้อมูลร้านยาในไฟล์ หรือข้อมูลไม่ถูกต้อง</p>';
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             regionSelect.appendChild(option);
         });
 
-        //shop selected
+        //เลือกร้าน
         if (selectedShopType) {
             regionSelect.disabled = false;
         } else {
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDistrict = districtSelect.value;
 
         if (!selectedShopType || !selectedRegion || !selectedProvince || !selectedDistrict) {
-            pharmacyListDiv.innerHTML = '<p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ ครบถ้วน</p>';
+            pharmacyListDiv.innerHTML = '<p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ ให้ครบถ้วน</p>';
             return;
         }
 
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`พบ ${filteredPharmacies.length} ร้านยาที่ตรงกับเงื่อนไข`);
         } else {
             pharmacyListDiv.innerHTML = '<p class="initial-message">ไม่พบร้านยาในเงื่อนไขที่เลือก</p>';
-            console.log("ไม่พบร้านยาที่ตรงกับเงื่อนไข");
+            console.log("ไม่พบร้านยาที่ตรงกับเงื่อนไข");//ไม่รู้ว่ายังได้ใช้ไหม เก็บไว้ก่อน
         }
     }
 
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listeners
+    // Event?
     shopTypeSelect.addEventListener('change', () => {
         regionSelect.value = '';
         provinceSelect.value = '';
