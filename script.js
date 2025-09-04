@@ -234,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
             districtSelect.disabled = true;
         }
     });
-
     provinceSelect.addEventListener('change', () => {
         districtSelect.value = '';
         clearPharmacyList();
