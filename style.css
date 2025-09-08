@@ -18,10 +18,10 @@ body {
 .home-header {
     display: block;
 
-    width: 100%; /* ให้ภาพใช้ความกว้างเต็มพื้นที่ของ parent */
+    width: 50%; /* ให้ภาพใช้ความกว้างเต็มพื้นที่ของ parent */
     max-width: 400px; /* กำหนดขนาดสูงสุดที่ 800px เพื่อให้มีขนาดเท่ากับกรอบ dropdown */
 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .container {
