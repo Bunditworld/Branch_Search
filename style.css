@@ -32,7 +32,7 @@ body {
     padding: 30px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 800px; /* กำหนดขนาดสูงสุดที่ 800px เพื่อให้มีขนาดเท่ากับกรอบ dropdown */
+    max-width: 400px; /* กำหนดขนาดสูงสุดที่ 800px เพื่อให้มีขนาดเท่ากับกรอบ dropdown */
 }
 
 h1 {
