@@ -8,6 +8,11 @@ body {
     justify-content: center;
     align-items: flex-start;
     min-height: 100vh;
+    background-image: url('bg-image.png');
+    background-size: cover; /* ทำให้รูปภาพเต็มพื้นที่เสมอ */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; /* ตรึงพื้นหลังไว้กับจอ */
 }
 
 .container {
