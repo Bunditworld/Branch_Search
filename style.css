@@ -15,14 +15,14 @@ body {
     background-attachment: fixed;
 }
 
-.home-header {
+/*.home-header {
     display: block;
 
     width: 50%; /* ให้ภาพใช้ความกว้างเต็มพื้นที่ของ parent */
     max-width: 400px; /* กำหนดขนาดสูงสุดที่ 800px เพื่อให้มีขนาดเท่ากับกรอบ dropdown */
 
     margin-bottom: 10px;
-}
+}*/
 
 .container {
     background-color: rgba(255, 255, 255, 0.7);
