@@ -15,6 +15,20 @@ body {
     background-attachment: fixed; /* ตรึงพื้นหลังไว้กับจอ */
 }
 
+.brand-logo {
+    display: block; /* ทำให้โลโก้อยู่ในบรรทัดใหม่ */
+    margin: 0 auto 20px; /* จัดกึ่งกลางและเพิ่มระยะห่างด้านล่าง */
+    max-width: 150px; /* กำหนดขนาดสูงสุดของโลโก้ */
+    height: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
 .container {
     background-color: rgba(255, 255, 255, 0.7); /* พื้นหลังสีขาว โปร่งแสง 70% */
     backdrop-filter: blur(8px); /* ทำให้พื้นหลังที่อยู่ด้านหลังเบลอ 8px */
