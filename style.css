@@ -16,13 +16,12 @@ body {
 }
 
 .container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.7); /* พื้นหลังสีขาว โปร่งแสง 70% */
+    backdrop-filter: blur(8px); /* ทำให้พื้นหลังที่อยู่ด้านหลังเบลอ 8px */
+    -webkit-backdrop-filter: blur(8px); /* สำหรับ Safari */
+    border-radius: 15px; /* ทำให้มุมโค้งมน */
+    padding: 30px; /* เพิ่มระยะห่างภายใน */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเล็กน้อย */
 }
 
 h1 {
