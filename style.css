@@ -19,7 +19,7 @@ body {
     display: block;
     margin: 0 auto;
     width: 100%; /* ให้ภาพใช้ความกว้างเต็มพื้นที่ของ parent */
-    max-width: 800px; /* กำหนดขนาดสูงสุดที่ 800px เพื่อให้มีขนาดเท่ากับกรอบ dropdown */
+    max-width: 400px; /* กำหนดขนาดสูงสุดที่ 800px เพื่อให้มีขนาดเท่ากับกรอบ dropdown */
     height: auto; /* รักษาอัตราส่วนของภาพ */
     margin-bottom: 20px;
 }
