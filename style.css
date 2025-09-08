@@ -15,12 +15,6 @@ body {
     background-attachment: fixed; /* ตรึงพื้นหลังไว้กับจอ */
 }
 
-.brand-logo {
-    display: block; /* ทำให้โลโก้อยู่ในบรรทัดใหม่ */
-    margin: 0 auto 20px; /* จัดกึ่งกลางและเพิ่มระยะห่างด้านล่าง */
-    max-width: 150px; /* กำหนดขนาดสูงสุดของโลโก้ */
-    height: auto;
-}
 
 h1 {
     text-align: center;
@@ -36,6 +30,10 @@ h1 {
     border-radius: 15px; /* ทำให้มุมโค้งมน */
     padding: 30px; /* เพิ่มระยะห่างภายใน */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเล็กน้อย */
+
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
 }
 
 h1 {
