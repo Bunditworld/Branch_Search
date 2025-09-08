@@ -18,8 +18,9 @@ body {
 .home-header {
     display: block;
     margin: 0 auto;
-    max-width: 200px;
-    height: auto;
+    width: 100%; /* เพิ่มคุณสมบัตินี้: ให้ภาพใช้ความกว้างเต็มพื้นที่ที่มีอยู่ */
+    max-width: 200px; /* กำหนดขนาดสูงสุดที่ 200px */
+    height: auto; /* รักษาอัตราส่วนของภาพ */
     margin-bottom: 20px;
 }
 
