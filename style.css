@@ -15,7 +15,7 @@ body {
     background-attachment: fixed;
 }
 
-header {
+.header {
   max-width: 40%;
   height: auto;
   min-width: 400px;
