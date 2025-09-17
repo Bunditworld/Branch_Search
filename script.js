@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data) && data.length > 0) {
                 allPharmacies = data;
                 populateShopTypes();
-                // อย่าให้ส่วนนี้ได้ทำงาน = หยาบละ
+                // We don't populate regions here initially
                 displayInitialMessage();
             } else {
                 pharmacyListDiv.innerHTML = '<p class="error-message">ไม่พบข้อมูลร้านยาในไฟล์ หรือข้อมูลไม่ถูกต้อง</p>';
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             shopTypeSelect.appendChild(option);
         });
         shopTypeSelect.disabled = false;
-        //dropdowns
+        // Initially disable all subsequent dropdowns
         regionSelect.disabled = true;
         provinceSelect.disabled = true;
         districtSelect.disabled = true;
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             regionSelect.appendChild(option);
         });
 
-        //เลือกร้าน
+        // Enable the region select only if a shop type is selected
         if (selectedShopType) {
             regionSelect.disabled = false;
         } else {
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedDistrict = districtSelect.value;
 
         if (!selectedShopType || !selectedRegion || !selectedProvince || !selectedDistrict) {
-            pharmacyListDiv.innerHTML = '<p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ ให้ครบถ้วน</p>';
+            pharmacyListDiv.innerHTML = '<p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ ครบถ้วน</p>';
             return;
         }
 
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             p.อำเภอ === selectedDistrict
         );
 
-        pharmacyListDiv.innerHTML = '';//อย่าพังอีกขอร้อง
+        pharmacyListDiv.innerHTML = '';
 
         if (filteredPharmacies.length > 0) {
             filteredPharmacies.forEach(pharmacy => {
@@ -165,7 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                 `;
 
-                // การ์ดแสดงผลร้านค้า ที่แสดงรวมถึงที่เพิ่มให้กดเบอร์ออกโทรทันที
+                // การ์ดแสดงผลร้านค้า
+                // แยกเบอร์โทรศัพท์หลายเบอร์ที่คั่นด้วย '/' แล้วสร้างลิงก์สำหรับแต่ละเบอร์
+                const phoneNumbersArray = phone.split(' / ');
+                const phoneLinksHtml = phoneNumbersArray.map(p => {
+                    const cleanPhone = p.replace(/\s/g, ''); 
+                    return `<a href="tel:${cleanPhone}" class="phone-link">${p}</a>`;
+                }).join(' / ');
+
                 pharmacyCard.innerHTML = `
                     <h3>${pharmacyName}</h3>
                     <p><strong>ประเภทร้านค้า:</strong> ${shopType}</p>
@@ -173,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>ภาค:</strong> ${region}</p>
                     <p><strong>จังหวัด:</strong> ${province}</p>
                     <p><strong>อำเภอ:</strong> ${district}</p>
-                    <p><strong>เบอร์โทร:</strong> <a href="tel:${phone.replace(/\s/g, '').replace(/\//g, ',')}" class="phone-link">${phone}</a></p>
+                    <p><strong>เบอร์โทร:</strong> ${phoneLinksHtml}</p>
                     <a href="${mapUrl}" target="_blank" class="map-link">
                         ${mapIconSvg}
                     </a>
@@ -183,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`พบ ${filteredPharmacies.length} ร้านยาที่ตรงกับเงื่อนไข`);
         } else {
             pharmacyListDiv.innerHTML = '<p class="initial-message">ไม่พบร้านยาในเงื่อนไขที่เลือก</p>';
-            console.log("ไม่พบร้านยาที่ตรงกับเงื่อนไข");//ไม่รู้ว่ายังได้ใช้ไหม เก็บไว้ก่อน
+            console.log("ไม่พบร้านยาที่ตรงกับเงื่อนไข");
         }
     }
 
@@ -206,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event?
+    // Event listeners
     shopTypeSelect.addEventListener('change', () => {
         regionSelect.value = '';
         provinceSelect.value = '';
@@ -234,6 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
             districtSelect.disabled = true;
         }
     });
+
     provinceSelect.addEventListener('change', () => {
         districtSelect.value = '';
         clearPharmacyList();
