@@ -169,7 +169,7 @@ select:disabled {
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #2c5eaa;
+    color: #397adc;
     text-decoration: none;
     font-size: 0.9em;
 }
@@ -185,7 +185,7 @@ select:disabled {
 }
 
 .phone-link {
-    color: #132a4d;
+    color: #397adc;
     text-decoration: none;
 }
 
