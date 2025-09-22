@@ -100,7 +100,7 @@ select:disabled {
     font-size: 1.1em;
     font-weight: bold;
     color: #fff;
-    background-color: #007bff;
+    background-color: #397adc;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -145,7 +145,7 @@ select:disabled {
 }
 
 .pharmacy-card h3 {
-    color: #132a4d;
+    color: #397adc;
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.4em;
@@ -169,7 +169,7 @@ select:disabled {
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #132a4d;
+    color: #2c5eaa;
     text-decoration: none;
     font-size: 0.9em;
 }
