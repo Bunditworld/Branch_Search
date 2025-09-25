@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
 
     let allPharmacies = [];
-    const jsonFilePath = 'pharmacies.json';//ไฟล์ข้อมูลที่อ่านเอาไปขึ้นเว็ป
+    const jsonFilePath = 'pharmacies.json';//อันนี้คือชื่อไฟล์ข้อมูลที่จะแสดง ถ้าลงไฟล์ข้อมูลใหม่ให้เปลี่ยนตามหรือตั้งเป็นชื่อไฟล์ใหม่
 
     fetch(jsonFilePath)
         .then(response => {
@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (Array.isArray(data) && data.length > 0) {
                 allPharmacies = data;
                 populateShopTypes();
-                // We don't populate regions here initially
                 displayInitialMessage();
             } else {
                 pharmacyListDiv.innerHTML = '<p class="error-message">ไม่พบข้อมูลร้านยาในไฟล์ หรือข้อมูลไม่ถูกต้อง</p>';
@@ -46,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
             shopTypeSelect.appendChild(option);
         });
         shopTypeSelect.disabled = false;
-        // Initially disable all subsequent dropdowns
         regionSelect.disabled = true;
         provinceSelect.disabled = true;
         districtSelect.disabled = true;
