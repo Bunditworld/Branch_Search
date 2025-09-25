@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
             regionSelect.appendChild(option);
         });
 
-        // Enable the region select only if a shop type is selected
         if (selectedShopType) {
             regionSelect.disabled = false;
         } else {
@@ -165,8 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </svg>
                 `;
 
-                // การ์ดแสดงผลร้านค้า
-                // แยกเบอร์โทรศัพท์หลายเบอร์ที่คั่นด้วย '/' แล้วสร้างลิงก์สำหรับแต่ละเบอร์
                 const phoneNumbersArray = phone.split(' / ');
                 const phoneLinksHtml = phoneNumbersArray.map(p => {
                     const cleanPhone = p.replace(/\s/g, ''); 
@@ -213,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listeners
     shopTypeSelect.addEventListener('change', () => {
         regionSelect.value = '';
         provinceSelect.value = '';
