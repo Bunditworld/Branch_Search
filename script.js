@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(() => {
-            // ไม่แสดงข้อความผิดพลาดใด ๆ ตามที่ขอ
         });
 
     function displayInitialMessage() {
