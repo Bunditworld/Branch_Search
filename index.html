@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ค้นหาร้านจำหน่ายผลิตภัณฑ์คุณสัมฤทธิ์</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหาร้านขายผลิตภัณฑ์คุณสัมฤทธิ์</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 </head>
 <body>
-    
-  <div>
-    <div>
-      <label for="shopTypeSelect">เลือกประเภทร้านค้า</label>
-      <select id="shopTypeSelect">
-        <option value="">-- เลือกประเภทร้านค้า --</option>
-      </select>
+    <img src="home-header.png" alt="header">
+    <div class="container">
+
+        <div class="controls">
+            <div class="select-group">
+                <label for="shopTypeSelect">เลือกประเภทร้านค้า</label>
+                <select id="shopTypeSelect">
+                    <option value="">-- เลือกประเภทร้านค้า --</option>
+                </select>
+            </div>
+            
+            <div class="select-group">
+                <label for="regionSelect">เลือกภาค</label>
+                <select id="regionSelect">
+                    <option value="">-- เลือกภาค --</option>
+                </select>
+            </div>
+
+            <div class="select-group">
+                <label for="provinceSelect">เลือกจังหวัด</label>
+                <select id="provinceSelect" disabled>
+                    <option value="">-- เลือกจังหวัด --</option>
+                </select>
+            </div>
+
+            <div class="select-group">
+                <label for="districtSelect">เลือกอำเภอ:</label>
+                <select id="districtSelect" disabled>
+                    <option value="">-- เลือกอำเภอ --</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="search-button-container">
+            <button id="searchButton">ค้นหา</button>
+        </div>
+
+        <div id="pharmacyList" class="pharmacy-list">
+            <p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ เพื่อแสดงร้าน</p>
+        </div>
     </div>
 
-    <div>
-      <label for="regionSelect">เลือกภาค</label>
-      <select id="regionSelect">
-        <option value="">-- เลือกภาค --</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="provinceSelect">เลือกจังหวัด</label>
-      <select id="provinceSelect" disabled>
-        <option value="">-- เลือกจังหวัด --</option>
-      </select>
-    </div>
-
-    <div>
-      <label for="districtSelect">เลือกอำเภอ</label>
-      <select id="districtSelect" disabled>
-        <option value="">-- เลือกอำเภอ --</option>
-      </select>
-    </div>
-  </div>
-
-  <div>
-    <button id="searchButton">ค้นหา</button>
-  </div>
-
-  <div id="pharmacyList">
-    <p class="initial-message">กรุณาเลือกประเภทร้านค้า ภาค จังหวัด และอำเภอ เพื่อแสดงร้าน</p>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
